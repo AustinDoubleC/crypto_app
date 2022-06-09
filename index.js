@@ -11,7 +11,7 @@ fetch("https://apis.scrimba.com/unsplash/photos/random?orientation=landscape&que
 		document.getElementById("author").textContent = `By: Dodi Achmad`
     })
 
-fetch("https://api.coingecko.com/api/v3/coins/dogecoin")
+fetch("https://api.coingecko.com/api/v3/coins/ethereum")
     .then(res => {
         if (!res.ok) {
             throw Error("Something went wrong")
@@ -24,9 +24,9 @@ fetch("https://api.coingecko.com/api/v3/coins/dogecoin")
             <span>${data.name}</span>
         `
         document.getElementById("crypto").innerHTML += `
-            <p>🎯: $${data.market_data.current_price.usd}</p>
-            <p>👆: $${data.market_data.high_24h.usd}</p>
-            <p>👇: $${data.market_data.low_24h.usd}</p>
+            <p> Current : $${data.market_data.current_price.usd}</p>
+            <p>24H high: $${data.market_data.high_24h.usd}</p>
+            <p>24H low : $${data.market_data.low_24h.usd}</p>
         `
     })
     .catch(err => console.error(err))
@@ -48,9 +48,10 @@ navigator.geolocation.getCurrentPosition(position => {
         })
         .then(data => {
             const iconUrl = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`
+            console.log(data)
             document.getElementById("weather").innerHTML = `
                 <img src=${iconUrl} />
-                <p class="weather-temp">${Math.round(data.main.temp)}º</p>
+                <p class="weather-temp">${Math.round((data.main.temp-32)/1.8)}º</p>
                 <p class="weather-city">${data.name}</p>
             `
         })
